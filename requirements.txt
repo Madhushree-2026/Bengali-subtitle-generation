@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+httpx
+yt-dlp
+python-dotenv
+pydantic
+faster-whisper
+ctranslate2
+transformers
+sentencepiece
+torch

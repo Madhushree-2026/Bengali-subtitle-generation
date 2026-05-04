@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; media-src 'self' file: blob: http://localhost:8000; connect-src 'self' http://localhost:8000; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'"/>
+  <title>Bengali Subtitles</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <!-- Top toolbar -->
+  <header class="toolbar">
+    <div class="toolbar-left">
+      <button id="btn-open-file" class="btn btn-primary">📂 Open Video File</button>
+      <button id="btn-open-url"  class="btn">🔗 Open URL / YouTube</button>
+      <button id="btn-clear"     class="btn btn-subtle" disabled>✕ Close Video</button>
+    </div>
+    <div class="toolbar-right">
+      <!-- <span id="status-badge" class="badge badge-idle">Idle</span> -->
+       <span id="mode-badge" class="badge badge-idle" title="Connection mode">...</span>
+<span id="status-badge" class="badge badge-idle">Idle</span>
+      <span id="progress-text" class="progress-text"></span>
+    </div>
+  </header>
+
+  <!-- URL input (shown when clicking Open URL) -->
+  <div id="url-bar" class="url-bar hidden">
+    <input id="url-input" type="text" placeholder="Paste a YouTube or direct video URL …" spellcheck="false"/>
+    <button id="btn-url-go" class="btn btn-primary">Load</button>
+    <button id="btn-url-cancel" class="btn btn-subtle">Cancel</button>
+  </div>
+
+  <!-- Main area: video + subtitle overlay -->
+  <main class="main">
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state">
+      <div class="empty-icon">🎬</div>
+      <p class="empty-title">No video loaded</p>
+      <p class="empty-sub">Open a file or paste a YouTube link to get Bengali subtitles</p>
+      <div class="empty-actions">
+        <button class="btn btn-primary btn-large" id="btn-empty-file">📂 Open File</button>
+        <button class="btn btn-large"             id="btn-empty-url">🔗 YouTube / URL</button>
+      </div>
+    </div>
+
+    <!-- Video container -->
+  <div id="video-container" class="video-container hidden">
+  <video id="video-player" controls preload="metadata" crossorigin="anonymous"></video>
+  <div id="subtitle-overlay" class="subtitle-overlay" style="pointer-events:none; z-index:10;"></div>
+</div>
+  </main>
+
+  <!-- Progress bar (shown while processing) -->
+  <div id="progress-bar-wrap" class="progress-bar-wrap hidden">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+
+  <!-- Subtitle controls footer -->
+  <footer class="footer">
+    <label class="footer-label">
+      Font size
+      <input type="range" id="font-size-slider" min="14" max="40" value="22">
+      <span id="font-size-val">22px</span>
+    </label>
+    <label class="footer-label">
+      <input type="checkbox" id="subtitle-bg-toggle" checked>
+      Subtitle background
+    </label>
+    <label class="footer-label">
+      Position
+      <input type="range" id="position-slider" min="2" max="30" value="8">
+    </label>
+    <span id="subtitle-count" class="footer-info"></span>
+  </footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

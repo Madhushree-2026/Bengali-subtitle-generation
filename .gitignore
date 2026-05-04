@@ -1,0 +1,7 @@
+node_modules
+__pycache__
+.env
+cached_mp3s
+cached_videos
+srt_outputs
+local_models

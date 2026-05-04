@@ -1,0 +1,144 @@
+/* frontend/styles.css */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface2: #242424;
+  --border: #333;
+  --text: #e8e8e8;
+  --text-muted: #888;
+  --accent: #6c63ff;
+  --accent-hover: #7c73ff;
+  --danger: #e05252;
+  --success: #4caf7d;
+  --radius: 8px;
+}
+
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; }
+
+/* ── Toolbar ─────────────────────────────── */
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag; /* makes the toolbar draggable on Mac */
+  flex-shrink: 0; gap: 12px;
+}
+.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 10px; -webkit-app-region: no-drag; }
+
+/* ── Buttons ─────────────────────────────── */
+.btn {
+  padding: 7px 14px; border-radius: var(--radius); border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); cursor: pointer; font-size: 13px;
+  transition: background 0.15s, border-color 0.15s; white-space: nowrap;
+}
+.btn:hover:not(:disabled) { background: #2e2e2e; border-color: #555; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-subtle { background: transparent; border-color: transparent; color: var(--text-muted); }
+.btn-subtle:hover { background: var(--surface2); border-color: var(--border); color: var(--text); }
+.btn-large { padding: 12px 24px; font-size: 15px; }
+
+/* ── Badges ──────────────────────────────── */
+.badge {
+  padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.badge-idle       { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-processing { background: #2a2060; color: #a89fff; border: 1px solid #4a3fa0; }
+.badge-done       { background: #0f3d24; color: var(--success); border: 1px solid #2a7a50; }
+.badge-error      { background: #3d1010; color: var(--danger);  border: 1px solid #7a2a2a; }
+.progress-text    { font-size: 12px; color: var(--text-muted); min-width: 60px; }
+
+/* ── URL bar ─────────────────────────────── */
+.url-bar {
+  display: flex; align-items: center; gap: 8px; padding: 10px 16px;
+  background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.url-bar input {
+  flex: 1; padding: 8px 12px; border-radius: var(--radius); border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); font-size: 13px; outline: none;
+}
+.url-bar input:focus { border-color: var(--accent); }
+
+/* ── Main area ───────────────────────────── */
+.main {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+body { display: flex; flex-direction: column; height: 100vh; }
+
+/* ── Empty state ─────────────────────────── */
+.empty-state {
+  text-align: center; padding: 40px 24px; display: flex; flex-direction: column;
+  align-items: center; gap: 12px;
+}
+.empty-icon  { font-size: 56px; opacity: 0.4; line-height: 1; }
+.empty-title { font-size: 18px; font-weight: 500; color: var(--text); }
+.empty-sub   { font-size: 14px; color: var(--text-muted); max-width: 340px; }
+.empty-actions { display: flex; gap: 12px; margin-top: 8px; }
+
+/* ── Video container ─────────────────────── */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#video-player {
+  max-width: 100%; max-height: 100%; width: 100%; height: 100%; object-fit: contain;
+  display: block;
+}
+
+/* ── Subtitle overlay ────────────────────── */
+.subtitle-overlay {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.55);
+  padding: 4px 12px;
+  border-radius: 4px;
+  max-width: 80%;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.1s;
+  white-space: pre-line;
+  word-break: break-word;
+}
+.subtitle-overlay:empty { background: transparent; }
+
+/* ── Progress bar ────────────────────────── */
+.progress-bar-wrap {
+  height: 3px; background: var(--surface); flex-shrink: 0;
+}
+.progress-bar {
+  height: 100%; background: var(--accent); width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ── Footer ──────────────────────────────── */
+.footer {
+  display: flex; align-items: center; gap: 20px; padding: 8px 16px;
+  background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.footer-label {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); cursor: pointer;
+}
+.footer-label input[type="range"] { width: 80px; cursor: pointer; accent-color: var(--accent); }
+.footer-label input[type="checkbox"] { cursor: pointer; accent-color: var(--accent); }
+.footer-info { font-size: 12px; color: var(--text-muted); margin-left: auto; }
+
+/* ── Utility ─────────────────────────────── */
+.hidden { display: none !important; }
